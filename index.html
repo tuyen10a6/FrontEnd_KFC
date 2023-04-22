@@ -17,6 +17,10 @@
    href="https://unpkg.com/swiper/swiper-bundle.min.css"
  />
  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+ 
  <link rel="stylesheet" href="dummy.css">
     <title>KFC | Order KFC Chiken Online & Find Restaurants</title>
    
@@ -576,7 +580,7 @@ ul{
         <div>
          <a href="index.html"><img class="imgkfc" src="https://online.kfc.co.in/static/media/kfcLogo.492728c6.svg" alt=""></a>
         </div>
-        <div class="div3"><h4 class="menuname"><a class="deals-gls" href="menu.html">Menu</a></h4></div>
+        <div class="div3"><h4 class="menuname"><a class="deals-gls" href="menu.html">Menu {{1 + 4}}</a></h4></div>
         <div><h4><a  class="deals-gls" href="deals.html">Deals</a></h4></div>
         <div></div>
         <div></div>
@@ -590,11 +594,13 @@ ul{
     <div class="mid">
         <h4 id="topbar">LET'S ORDER FOR DELIVERY, PICK UP, OR DINE-IN <span><button id="button-start"><a class="start-gls" href="#">start order</a></button></span> </h4>    </div>
     <!-- there should be some other div here for the sliding images and "welcome to KFC" -->
-    <div class="main-carousel">
-        <div class="cell"><img src="https://images.ctfassets.net/wtodlh47qxpt/bwwtSv4zmZZm42c5wSg8Z/e24fc963e2fe768d2bf36bc1c200f7ae/Matchday_Banner_1440x396px_A.jpg" alt="first slide"></div>
-        <div class="cell"><img src="https://images.ctfassets.net/wtodlh47qxpt/6C7plVV6khmYCotBjkMbpX/1871bd3bc4f6b4ef704564f47bf2cffe/KFC_600_Bucket_KV_Digital_desktop.png" alt="second slide"></div>
-        <div class="cell"><img src="https://images.ctfassets.net/wtodlh47qxpt/4w2NU51eNqAlF0S4k3YLTB/0872e046c202005f49e6c94489c8ce40/4Value_Burger_1440x396px.png" alt="3rd slide"></div>
+    <div style="display:flex ;" class="SlideHome">
+        <div  ng-repeat =" x in slides"   class="cell">
+             <img style="width:100%" src="{{x.slideUrl}}"/>
+            </div>
+        
     </div>
+    
 
     <!-- welcome page html -->
     <div id="welcomePage">
@@ -848,6 +854,11 @@ ul{
 </script>
 </body>
 </html>
+<script>
+    $(document).ready(function(){
+      $('.SlideHome').slick();
+    });
+  </script>
 <script src="/JS/home.js"></script>
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 <script type="text/javascript">$('.main-carousel').flickity({
