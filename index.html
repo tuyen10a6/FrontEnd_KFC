@@ -20,14 +20,20 @@
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
- 
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+				
  <link rel="stylesheet" href="dummy.css">
+ <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <title>KFC | Order KFC Chiken Online & Find Restaurants</title>
    
 <style>.topmenu{
     width:100%;
     display: flex;
-    position: absolute;
+    position: absolute; 
     box-sizing: border-box;
     padding: 20px 0px;
     margin-left: -20px;
@@ -56,6 +62,38 @@
 }
 .imgsignin{
     margin-left:82%;
+}
+button {
+  margin: 20px;
+}
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+/* 1 */
+.btn-1 {
+  background: rgb(6,14,131);
+  background: linear-gradient(0deg, rgba(6,14,131,1) 0%, rgba(12,25,180,1) 100%);
+  border: none;
+}
+.btn-1:hover {
+   background: rgb(0,3,255);
+background: linear-gradient(0deg, rgba(0,3,255,1) 0%, rgba(2,126,251,1) 100%);
 }
 .span{
   border-left: 0.3px solid black;
@@ -580,7 +618,7 @@ ul{
         <div>
          <a href="index.html"><img class="imgkfc" src="https://online.kfc.co.in/static/media/kfcLogo.492728c6.svg" alt=""></a>
         </div>
-        <div class="div3"><h4 class="menuname"><a class="deals-gls" href="menu.html">Menu {{1 + 4}}</a></h4></div>
+        <div class="div3"><h4 class="menuname"><a class="deals-gls" href="menu.html?id=1">Menu </a></h4></div>
         <div><h4><a  class="deals-gls" href="deals.html">Deals</a></h4></div>
         <div></div>
         <div></div>
@@ -596,7 +634,7 @@ ul{
     <!-- there should be some other div here for the sliding images and "welcome to KFC" -->
     <div style="display:flex ;" class="SlideHome">
         <div  ng-repeat =" x in slides"   class="cell">
-             <img style="width:100%" src="{{x.slideUrl}}"/>
+             <img style="width:100% ; " src="{{x.slideUrl}}"/>
             </div>
         
     </div>
@@ -610,56 +648,46 @@ ul{
     <!-- welcome page completed -->
     
     <div class="categories">
-        <div class="text"><h1>BROWSE CATEGORIES</h1></div>
+        <div class="text"><h1>DANH MỤC SẢN PHẨM</h1></div>
         <div class="line"><hr></div>
         <div id="container">
-            <div id="a">
+            <div  ng-repeat  = "x in category" id="a">
                 <div class="boximg">
-                    <a href="menu.html"><img src="https://orderserv-kfc-assets.yum.com/15895bb59f7b4bb588ee933f8cd5344a/images/categories/CAT3355.jpg?ver=13.9" class="Image"></a>
+                    <a href="menu.html?id={{x.maDanhMuc}}"><img src={{x.imageDanhMuc}} class="Image"></a>
                 </div>
-                <div class="boxtext">MATCH DAY SPECIALS</div>
+                <div class="boxtext">{{x.tenDanhMuc}}</div>
             </div>
-            <div id="b">
-                <div class="boximg">
-                    <a href="menu.html"><img src="https://orderserv-kfc-assets.yum.com/15895bb59f7b4bb588ee933f8cd5344a/images/categories/CAT3131.jpg?ver=13.9" class="Image"></a>
+           
+        </div>
+     </div> 
+     <div class="categories">
+        <div class="text"><h1>LƯỢT MUA NHIỀU NHẤT</h1></div>
+        <div class="line"><hr></div>
+        <div id="container">
+            <div style="height: 350px;"   ng-repeat  = "x in BestOrder | limitTo : 4" id="a">
+                <div class="boximg">    
+                    <a href="#"><img style="min-height:250px ;" src={{x.image}} class="Image"></a>
                 </div>
-                <div class="boxtext">CHICKEN BUCKETS</div>
-            </div>
-            <div id="c">
+                <div style="margin-bottom:0px ; padding:10px ;" class="boxtext">{{x.tenSanPham}} - {{x.giaTien | number}} đ </div>
+                <div style="font-size: 12px; margin: 0px;" class="boxtext"> {{x.moTa}} <br/> - Lượt mua: <span style="color:red"> {{x.totalQuantitySold}}</span> </div>
+                <button style="margin: 0px; font-size: 13px;" class="custom-btn btn-1">THÊM VÀO GIỎ HÀNG</button>
+            </div>  
+           
+        </div>
+     </div> 
+
+     <div class="categories">
+        <div class="text"><h1>SẢN PHẨM MỚI NHẤT</h1></div>
+        <div class="line"><hr></div>
+        <div id="container">
+            <div style="height: 350px;"  ng-repeat  = "x in ProductTimeNew  | limitTo : 4" id="a">
                 <div class="boximg">
-                    <a href="menu.html"><img src="https://orderserv-kfc-assets.yum.com/15895bb59f7b4bb588ee933f8cd5344a/images/categories/CAT3342.jpg?ver=13.9" class="Image"></a>
+                    <a href="#"><img style="min-height: 250px;" src={{x.image}} class="Image"></a>
                 </div>
-                <div class="boxtext">BIRYANI BUCKETS</div>
+                <div class="boxtext">{{x.tenSanPham}} - {{x.giaTien | number}} đ </div>
+                <button style="margin: 0px; font-size: 13px;" class="custom-btn btn-1">THÊM VÀO GIỎ HÀNG</button>
             </div>
-            <div id="d">
-                <div class="boximg">
-                    <a href="menu.html"><img src="https://orderserv-kfc-assets.yum.com/15895bb59f7b4bb588ee933f8cd5344a/images/categories/CAT3246.jpg?ver=13.9" class="Image"></a>
-                </div>
-                <div class="boxtext">BOX MEALS</div>
-            </div>
-            <div id="e">
-                <div class="boximg">
-                    <a href="menu.html"><img src="https://orderserv-kfc-assets.yum.com/15895bb59f7b4bb588ee933f8cd5344a/images/categories/CAT3132.jpg?ver=13.9" class="Image"></a>
-                </div>
-                <div class="boxtext">BURGERS</div>
-            </div>
-            <div id="f">
-                <div class="boximg">
-                    <a href="menu.html"><img src="https://orderserv-kfc-assets.yum.com/15895bb59f7b4bb588ee933f8cd5344a/images/categories/CAT3311.jpg?ver=13.9" class="Image"></a>
-                </div>
-                <div class="boxtext">STAY HOME SPECIALS</div>
-            </div>
-            <div id="h">
-                <div class="boximg">
-                    <a href="menu.html"><img src="https://orderserv-kfc-assets.yum.com/15895bb59f7b4bb588ee933f8cd5344a/images/categories/CAT3134.jpg?ver=13.9" class="Image"></a>
-                </div>
-                <div class="boxtext">SNACKS</div>
-            </div>
-            <div id="g">
-                <div class="boximg">
-                    <a href="#"><img src="https://online.kfc.co.in/static/media/finger_lickin.fc21c805.svg" class="Imagelast"></a></div>
-                    <div class="boxtextmenu"><a class="deals-gls" href="#">View All Menu</a></div>
-            </div>
+           
         </div>
      </div> 
      <!-- offers and deals headding  -->

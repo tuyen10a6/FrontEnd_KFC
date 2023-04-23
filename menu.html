@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@700;800&family=Kanit:wght@900&family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/JS/Menu.js"></script>
 </head>
     <style>
         body{
@@ -225,15 +227,37 @@
         .tocart{
             padding: 0px 10px;
         }
+        #mySelect {
+  width: 200px; /* đặt chiều rộng cho thẻ select */
+  height: 40px; /* đặt chiều cao cho thẻ select */
+  font-size: 16px; /* đặt kích thước chữ cho các mục trong thẻ select */
+  font-family: Arial, sans-serif; /* đặt kiểu chữ cho các mục trong thẻ select */
+  color: #333; /* đặt màu chữ cho các mục trong thẻ select */
+  background-color: #fff; /* đặt màu nền cho thẻ select */
+  border: 1px solid #ccc; /* đặt đường viền cho thẻ select */
+  border-radius: 4px; /* đặt độ cong cho góc của thẻ select */
+  padding: 8px; /* đặt khoảng cách giữa nội dung của thẻ select và đường viền */
+}
+
+#mySelect option {
+  font-size: 16px; /* đặt kích thước chữ cho các mục trong danh sách */
+  font-family: Arial, sans-serif; /* đặt kiểu chữ cho các mục trong danh sách */
+  color: #333; /* đặt màu chữ cho các mục trong danh sách */
+  background-color: #fff; /* đặt màu nền cho các mục trong danh sách */
+}
+
         
     </style>
-<body>
+<body ng-app = "myApp" ng-controller ="Cate">
     <div class="topmenu">
         <div></div>
         <div>
-            <img class="imgkfc" src="https://online.kfc.co.in/static/media/kfcLogo.492728c6.svg" alt="">
+            <a href="index.html">
+                <img class="imgkfc" src="https://online.kfc.co.in/static/media/kfcLogo.492728c6.svg" alt="">
+
+            </a>
         </div>
-        <div class="div3"><h4 class="menuname"><a href="menu.html" style="text-decoration:none;color:black;font-size:14px;">Menu</a></h4></div>
+        <div class="div3"><h4 class="menuname"><a href="menu.html" style="text-decoration:none;color:black;font-size:14px;"></a></h4></div>
                 <div><h4><a href="menu.html" style="text-decoration:none;color:black;font-size:14px;">Deals</a></h4></div>
         <div></div>
         <div></div>
@@ -252,18 +276,15 @@
             <div class="leftmenu">
                 <img src="https://online.kfc.co.in/static/media/Stripes_Small_OffersIcon.87fc6256.svg" alt="" class="iconimg">
                 <ul class="kfcmenu">
-                    <li>KFC MENU</li>
+                    <li>KFC MENU </li>
                 </ul>
                
                 <ul>
-                    <li class="matchday">Match Day Specials</li>
-                    <li id="chickenbuckets">Chicken Buckets</li>
-                    <li id="biryanibuckets">Biryani Buckets</li>
-                    <li id="boxmeals">Box Meals</li>
-                    <li id="burgers">Burgers</li>
-                    <li id="stayhomespecial">Stay Home Specials</li>
-                    <li id="snacks">Snacks</li>
-                   <li id="beverages"> Beverages</li>
+                    <a style="text-decoration: none;" href="menu.html?id={{x.maDanhMuc}}" ng-repeat = "x in category">
+                        <li  class="matchday">{{x.tenDanhMuc}}</li>
+
+                    </a>
+                    
                 </ul>
 
             </div>
@@ -274,41 +295,28 @@
     
             <div class="rightside">
                 <form id="form"> 
-                    <input type="search" id="query" name="q" placeholder=" Search our menu">
+                    <input ng-change="searchProduct()" ng-model ="SearchProductName" type="search" id="query" name="q" placeholder=" Search our menu">
+                    <select ng-change="handleChange()" ng-model="selectedValue" id="mySelect">
+                        <option value="">Tìm kiếm</option>
+                        <option value="2">Giá từ cao đến thấp</option>
+                        <option value="1">Giá từ thấp lên cao</option>
+                      </select>
+                      
+                      
                   </form>
-                  <p align="right" class="tocart"> <a class="acart" href="cart.html">
+                  <p  class="tocart"> <a class="acart" href="cart.html">
                       <i class="fa fa-shopping-cart" style="font-size:25px;color:red">Cart</i></a></p>
                   <hr></hr>
-                  <p id="para1">MATCH DAY SPECIALS</p>
+                  <p id="para1">DANH SÁCH SẢN PHẨM</p>
                   <div id="alignhere">
-            
+                        <div ng-repeat = "x in productcate" class="Product_Item">
+                               <img style="width:270px ; height: 220px; border-radius: 6px;" src={{x.image}} alt="">
+                               <h4 >{{x.tenSanPham}} - {{x.giaTien | number}} đ</h4>
+                               <button ng-click = "addToCart(x)" style="padding: 7px ; background: #ccc; border: 1px solid #ccc; border-radius: 5px;">Thêm vào giỏ hàng</button>
+                        </div>
                   </div>
 
-                  <p><p id="para2">CHICKEN BUCKETS</p></p>
-                  <div id="alignhere2">
-                </div>
-
-                <p><p id="para3">BIRYANI BUCKETS</p></p>
-                  <div id="alignhere3">
-                </div>
-
-                <p><p id="para4">BOX MEALS</p></p>
-                <div id="alignhere4">
-              </div>
-
-              <p><p id="para5">BURGERS</p></p>
-                <div id="alignhere5">
-              </div>
-
-              <p><p id="para6">STAY HOME SPECIALS</p></p>
-                <div id="alignhere6">
-              </div>
-              <p><p id="para7">SNACKS</p></p>
-                <div id="alignhere7">
-              </div>
-              <p><p id="para8">BEVERAGES</p></p>
-                <div id="alignhere8">
-              </div>
+                 
             </div>
             <!---modal popup-->
             <div id="myModal" class="modal">
