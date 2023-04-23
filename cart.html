@@ -227,15 +227,28 @@
     <div class="middlesec"></div>
     <div style="width: 80%; margin: 0px auto" class="Infor_customer">
       <h2>THÔNG TIN KHÁCH HÀNG</h2>
-      <form>
+      <!-- <form>
         <label for="name">Họ và tên:</label><br />
-        <input type="text" id="name" name="name" required /><br />
+        <input
+          ng-model="customername"
+          type="text"
+          id="name"
+          name="name"
+          required
+        /><br />
 
         <label for="address">Địa chỉ:</label><br />
-        <input type="text" id="address" name="address" required /><br />
+        <input
+          ng-model="customeraddress"
+          type="text"
+          id="address"
+          name="address"
+          required
+        /><br />
 
         <label for="phone">Số điện thoại:</label><br />
         <input
+          ng-model="customerphone"
           type="tel"
           id="phone"
           name="phone"
@@ -244,9 +257,67 @@
         /><br />
 
         <label for="email">Email:</label><br />
-        <input type="email" id="email" name="email" required /><br />
+        <input
+          ng-model="customeremail"
+          type="email"
+          id="email"
+          name="email"
+          required
+        /><br />
         <label for="colors">Chọn chi nhánh gần nhất:</label>
-        <select id="store_branch" name="store">
+        <select ng-model="customerbranch" id="store_branch" name="store">
+          <option ng-repeat="x in store_branch" value="{{x.maChiNhanh}}">
+            {{x.tenChiNhanh}}
+          </option>
+        </select>
+
+        <input ng-click="createOrder()" type="submit" value="Gửi" />
+      </form> -->
+      <form name="orderForm" ng-submit="orderForm.$valid && createOrder()">
+        <label for="name">Họ và tên:</label><br />
+        <input
+          ng-model="customername"
+          type="text"
+          id="name"
+          name="name"
+          required
+        /><br />
+
+        <label for="address">Địa chỉ:</label><br />
+        <input
+          ng-model="customeraddress"
+          type="text"
+          id="address"
+          name="address"
+          required
+        /><br />
+
+        <label for="phone">Số điện thoại:</label><br />
+        <input
+          ng-model="customerphone"
+          type="tel"
+          id="phone"
+          name="phone"
+          pattern="[0-9]{10}"
+          required
+        /><br />
+
+        <label for="email">Email:</label><br />
+        <input
+          ng-model="customeremail"
+          type="email"
+          id="email"
+          name="email"
+          required
+        /><br />
+
+        <label for="colors">Chọn chi nhánh gần nhất:</label>
+        <select
+          ng-model="customerbranch"
+          id="store_branch"
+          name="store"
+          required
+        >
           <option ng-repeat="x in store_branch" value="{{x.maChiNhanh}}">
             {{x.tenChiNhanh}}
           </option>
